@@ -1,9 +1,10 @@
 # Marlin mod specific definitions.
+USE_MARLIN = YES
 
 # Which board.
 MARLIN_MOD_BOARD = chitu_f103
 # Use the encrypted binary image.
-MARLIN_MOD_BIN = ${MARLIN_BUILD_DIR}/${MARLIN_MOD_BOARD}/update.cbd
+MOD_FIRMWARE = update.cbd
 
 # 3D printed parts for the mod.
 MOD_MODEL = tx5sapm
