@@ -1,53 +1,47 @@
 # Enable this if using Octoprint.
-USE_OCTOPRINT = YES
+# USE_OCTOPRINT = YES
 # Enable this if using an Raspberry PI 3 for Octoprint.
 # USE_RPI3 = YES
 # Enable this if using an Orange PI Zero for Octoprint.
-USE_OPIZ = YES
+# USE_OPIZ = YES
 
-ifeq (USE_OCTOPRINT,YES)
-ifeq (USE_RPI3,YES)
+ifeq (${USE_OCTOPRINT},YES)
+$(info Adding parts for Octoprint)
+ifeq (${USE_RPI3},YES)
+$(info Adding case for Raspberry Pi 3)
 OCTOPRINT_DEPS = \
   ${OSC_STL_DIR}/rpi_3b_top.stl \
   ${OSC_STL_DIR}/rpi_3b_bottom.stl
 endif
-ifeq (USE_OPIZ,YES)
+ifeq (${USE_OPIZ},YES)
+$(info Adding case for Orange Pi Zero)
 OCTOPRINT_DEPS = \
   ${OSC_STL_DIR}/opiz_top.stl \
   ${OSC_STL_DIR}/opiz_bottom.stl
 endif
 endif
 
-# Model dependencies.
-MODEL_DEPS = \
-  ${OSC_STL_DIR}/x_motor_mount_X5SA.stl \
-  ${OSC_STL_DIR}/y_motor_mount_X5SA.stl \
-  ${OSC_STL_DIR}/Cornerbrackets.STL \
-  ${OSC_STL_DIR}/x-belt-holder-gt2.stl \
-  ${OSC_STL_DIR}/x-belt-holder-thin-gt2.stl \
-  $(OCTOPRINT_DEPS)
-
-
 #++++++++++++++++++++++++++++++++++++++++
 # From the Tronxy XS5A Pro zip file.
 #----------------------------------------
-${OSC_STL_DIR}/x_motor_mount_X5SA.stl: \
-  ${OSC_OTS_DIR}/x_motor_mount_X5SA.stl
-	mkdir -p $(@D)
-	cp $< $@
 
 # The X mount needs to be modified. A SolidPython script
 # will be used. At that time this needs to be replaced
 # with a dependency on the script.
 ${OSC_STL_DIR}/x_motor_mount_X5SA.stl: \
-  ${OSC_OTS_DIR}/x_motor_mount_X5SA.stl
+  ${OSC_OTS_DIR}/djb-x.stl
+	mkdir -p $(@D)
+	cp $< $@
+
+${OSC_STL_DIR}/y_motor_mount_X5SA.stl: \
+  ${OSC_OTS_DIR}/djb-y.stl
 	mkdir -p $(@D)
 	cp $< $@
 
 #++++++++++++++++++++++++++++++++++++++++
 # Downloaded from the net.
 #----------------------------------------
-# This corner brace does a lot to stiffen the frame.
+# This corner brace stiffens the frame significantly.
 # https://www.thingiverse.com/thing:2878626
 ${OSC_STL_DIR}/Cornerbrackets.stl:
 	mkdir -p $(@D)
@@ -98,3 +92,12 @@ ${OSC_STL_DIR}/opiz_bottom.stl:
 	mkdir -p $(@D)
 	wget -O $@ \
 	  https://cdn.thingiverse.com/assets/2e/82/97/2c/d4/opiz_box_bottom1_1v0.stl
+
+# Model dependencies.
+MODEL_DEPS = \
+  ${OSC_STL_DIR}/x_motor_mount_X5SA.stl \
+  ${OSC_STL_DIR}/y_motor_mount_X5SA.stl \
+  ${OSC_STL_DIR}/Cornerbrackets.stl \
+  ${OSC_STL_DIR}/x-belt-holder-gt2.stl \
+  ${OSC_STL_DIR}/x-belt-holder-thin-gt2.stl \
+  $(OCTOPRINT_DEPS)
