@@ -21,6 +21,10 @@
  */
 #pragma once
 
+/*
+ * This is the base configuration used as a starting point. Some settings
+ * from https://github.com/rhapsodyv/Marlin are also used.
+*/
 #define CONFIG_EXAMPLES_DIR "Tronxy/X5SA"
 
 /**
