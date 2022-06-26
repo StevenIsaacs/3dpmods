@@ -1,26 +1,3 @@
-# Enable this if using Octoprint.
-# USE_OCTOPRINT = YES
-# Enable this if using an Raspberry PI 3 for Octoprint.
-# USE_RPI3 = YES
-# Enable this if using an Orange PI Zero for Octoprint.
-# USE_OPIZ = YES
-
-ifeq (${USE_OCTOPRINT},YES)
-$(info Adding parts for Octoprint)
-ifeq (${USE_RPI3},YES)
-$(info Adding case for Raspberry Pi 3)
-OCTOPRINT_DEPS = \
-  ${OSC_STL_DIR}/rpi_3b_top.stl \
-  ${OSC_STL_DIR}/rpi_3b_bottom.stl
-endif
-ifeq (${USE_OPIZ},YES)
-$(info Adding case for Orange Pi Zero)
-OCTOPRINT_DEPS = \
-  ${OSC_STL_DIR}/opiz_top.stl \
-  ${OSC_STL_DIR}/opiz_bottom.stl
-endif
-endif
-
 #++++++++++++++++++++++++++++++++++++++++
 # From the Tronxy XS5A Pro zip file.
 #----------------------------------------
@@ -41,34 +18,34 @@ ${OSC_STL_DIR}/y_motor_mount_X5SA.stl: \
 #++++++++++++++++++++++++++++++++++++++++
 # Downloaded from the net.
 #----------------------------------------
-# This corner brace stiffens the frame significantly.
-# https://www.thingiverse.com/thing:2878626
 ${OSC_STL_DIR}/Cornerbrackets.stl:
 	mkdir -p $(@D)
 	wget -O $@ \
 	  https://cdn.thingiverse.com/assets/d6/30/9e/1f/7d/Cornerbrackets.STL
 
-# These are a much better way of holding a belt than the tie straps supplied
-# by Tronxy. Face the teeth of the belt inward so that one side holds the
-# other and slip the holder over both layers. The teeth of the belt do the
-# rest.
-# https://www.thingiverse.com/thing:2354961
 ${OSC_STL_DIR}/x-belt-holder-gt2.stl:
 	mkdir -p $(@D)
 	wget -O $@ \
 	  https://cdn.thingiverse.com/assets/20/e0/50/20/35/X-Belt-Holder-GT2.stl
 
-# https://www.thingiverse.com/thing:2354961
 ${OSC_STL_DIR}/x-belt-holder-thin-gt2.stl:
 	mkdir -p $(@D)
 	wget -O $@ \
 	  https://cdn.thingiverse.com/assets/2e/a0/07/b3/cd/X-Belt-Holder-Thin-GT2.stl
 
+# Model dependencies.
+MODEL_DEPS = \
+  ${OSC_STL_DIR}/x_motor_mount_X5SA.stl \
+  ${OSC_STL_DIR}/y_motor_mount_X5SA.stl \
+  ${OSC_STL_DIR}/Cornerbrackets.stl \
+  ${OSC_STL_DIR}/x-belt-holder-gt2.stl \
+  ${OSC_STL_DIR}/x-belt-holder-thin-gt2.stl \
+
 # Running OctoPrint has some advantages -- one of which is display of the
 # bed leveling mesh.
 
-# For a Raspberry PI 3b.
-# https://www.thingiverse.com/thing:3046390
+ifdef OS_BOARD
+ifeq (${OS_BOARD},rpi3)
 ${OSC_STL_DIR}/rpi_3b_top.stl:
 	mkdir -p $(@D)
 	wget -O $@ \
@@ -79,10 +56,11 @@ ${OSC_STL_DIR}/rpi_3b_bottom.stl:
 	wget -O $@ \
 	  https://cdn.thingiverse.com/assets/f1/4b/1b/8b/d8/RaspPi_Bp_bottom_case_V2.stl
 
-# For a Orange PI Zero.
-# Instructions at: https://daumemo.com/installing-octoprint-on-orangepi-zero-part-1/
-# NOTE: Openscad source is also available.
-# https://www.thingiverse.com/thing:3157217
+MODEL_DEPS += \
+  ${OSC_STL_DIR}/rpi_3b_top.stl \
+  ${OSC_STL_DIR}/rpi_3b_bottom.stl
+endif
+ifeq (${OS_BOARD},opiz)
 ${OSC_STL_DIR}/opiz_top.stl:
 	mkdir -p $(@D)
 	wget -O $@ \
@@ -93,11 +71,61 @@ ${OSC_STL_DIR}/opiz_bottom.stl:
 	wget -O $@ \
 	  https://cdn.thingiverse.com/assets/2e/82/97/2c/d4/opiz_box_bottom1_1v0.stl
 
-# Model dependencies.
-MODEL_DEPS = \
-  ${OSC_STL_DIR}/x_motor_mount_X5SA.stl \
-  ${OSC_STL_DIR}/y_motor_mount_X5SA.stl \
-  ${OSC_STL_DIR}/Cornerbrackets.stl \
-  ${OSC_STL_DIR}/x-belt-holder-gt2.stl \
-  ${OSC_STL_DIR}/x-belt-holder-thin-gt2.stl \
-  $(OCTOPRINT_DEPS)
+MODEL_DEPS += \
+  ${OSC_STL_DIR}/opiz_top.stl \
+  ${OSC_STL_DIR}/opiz_bottom.stl
+endif
+endif
+
+
+ifeq (${MAKECMDGOALS},help-model)
+define HelpModelMsg
+Make segment: model.mk (Used by ed-oscad)
+
+This segement defines all the targets for building the 3D printed parts
+for the Tronxy X5SA Pro 3D printer mod and is included by the ed-oscad
+top level make file.
+
+Defined in mod.mk:
+  OS_BOARD = ${OS_BOARD}
+    Which SBC will be used to run OctoPrint. If defined then a 3D printable
+	case is generated for the board.
+
+Defined in config.mk:
+
+Defines:
+
+Command line targets:
+  help-octoprint        Display this help.
+
+Uses:
+
+Attributions:
+  Many thanks to the efforts of others.
+
+  Chassis stiffening
+    This corner brace stiffens the frame significantly.
+    https://www.thingiverse.com/thing:2878626
+
+  Belt retainers
+    These are a much better way of holding a belt than the tie straps supplied
+    by Tronxy. Face the teeth of the belt inward so that one side holds the
+    other and slip the holder over both layers. The teeth of the belt do the
+    rest.
+    https://www.thingiverse.com/thing:2354961
+
+  SBC case
+    For a Raspberry PI 3b.
+    https://www.thingiverse.com/thing:3046390
+
+    For a Orange PI Zero.
+    Instructions at: https://daumemo.com/installing-octoprint-on-orangepi-zero-part-1/
+    NOTE: OpenScad source is also available.
+    https://www.thingiverse.com/thing:3157217
+endef
+
+export HelpModelMsg
+help-model:
+	@echo "$$HelpModelMsg"
+
+endif
