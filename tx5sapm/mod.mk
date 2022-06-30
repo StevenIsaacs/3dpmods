@@ -1,6 +1,8 @@
 #+
 # Mod definitions for the Tronxy X5SA Pro 3D Printer.
 #-
+$(info MOD=${MOD})
+
 # 3D CAD models.
 CAD_TOOL = ed-oscad
 CAD_TOOL_VARIANT = dev
