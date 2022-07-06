@@ -4,7 +4,7 @@
 $(info MOD=${MOD})
 
 # 3D CAD models.
-CAD_TOOL = ed-oscad
+CAD_TOOL = openscad
 CAD_TOOL_VARIANT = dev
 
 # Firmware variant.
@@ -13,9 +13,11 @@ FIRMWARE_VARIANT = bugfix-2.0.x
 # Marlin specific definitions.
 # Which board.
 MARLIN_MOD_BOARD = chitu_f103
+# The output firmware image. This differs depending upon the board.
+MARLIN_FIRMWARE = update.cbd
 
 # Remote control software
-CONTROL_SOFTWARE = octoprint
+# SERVER_SOFTWARE = octoprint
 SBC_BOARD = opiz
 OS_VARIANT = debian
 
@@ -28,13 +30,14 @@ printer.
 
 See the other help targets for more information.
 
-Defines:
+Defines (see help for more information):
   CAD_TOOL = ${CAD_TOOL}
   CAD_TOOL_VARIANT = ${CAD_TOOL_VARIANT}
   FIRMWARE = ${FIRMWARE}
   FIRMWARE_VARIANT = ${FIRMWARE_VARIANT}
   MARLIN_MOD_BOARD = ${MARLIN_MOD_BOARD}
-  CONTROL_SOFTWARE = ${CONTROL_SOFTWARE}
+  MARLIN_FIRMWARE = ${MARLIN_FIRMWARE}
+  SERVER_SOFTWARE = ${SERVER_SOFTWARE}
   SBC_BOARD = ${SBC_BOARD}
   OS_VARIANT = ${OS_VARIANT}
 
@@ -44,5 +47,5 @@ endef
 
 export HelpModMsg
 help-mod:
-	@echo "$$HelpModMsg"
+	@echo "$$HelpModMsg" | less
 endif

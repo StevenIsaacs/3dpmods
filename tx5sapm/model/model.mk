@@ -1,6 +1,7 @@
 #++++++++++++++++++++++++++++++++++++++++
 # From the Tronxy XS5A Pro zip file.
 #----------------------------------------
+$(info CAD model for the Tronxy XS5A Pro mod)
 
 # The X mount needs to be modified. A SolidPython script
 # will be used. At that time this needs to be replaced
@@ -126,6 +127,6 @@ endef
 
 export HelpModelMsg
 help-model:
-	@echo "$$HelpModelMsg"
+	@echo "$$HelpModelMsg" | less
 
 endif
