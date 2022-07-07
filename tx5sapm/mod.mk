@@ -9,7 +9,7 @@ CAD_TOOL_VARIANT = dev
 
 # Firmware variant.
 FIRMWARE = marlin
-FIRMWARE_VARIANT = bugfix-2.0.x
+FIRMWARE_VARIANT = 2.1.x
 # Marlin specific definitions.
 # Which board.
 MARLIN_MOD_BOARD = chitu_f103
