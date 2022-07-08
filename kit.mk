@@ -3,9 +3,6 @@
 #----------------------------------------------------------------------------
 $(info KIT=${KIT})
 
-MOD_DIR = ${KIT_DIR}/${MOD}
-MOD_STAGING_DIR = ${STAGING_DIR}/${KIT}/${MOD}
-
 include ${MOD_DIR}/mod.mk
 
 ifeq (${MAKECMDGOALS},help-kit)
