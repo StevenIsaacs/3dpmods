@@ -17,8 +17,9 @@ MARLIN_MOD_BOARD = chitu_f103
 MARLIN_FIRMWARE = update.cbd
 
 # Remote control software
-# SERVER_SOFTWARE = octoprint
-SBC_BOARD = opiz
+SERVER_SOFTWARE = octoprint
+OS = linux
+OS_BOARD = opiz
 OS_VARIANT = debian
 
 ifeq (${MAKECMDGOALS},help-mod)
@@ -38,14 +39,15 @@ Defines (see help for more information):
   MARLIN_MOD_BOARD = ${MARLIN_MOD_BOARD}
   MARLIN_FIRMWARE = ${MARLIN_FIRMWARE}
   SERVER_SOFTWARE = ${SERVER_SOFTWARE}
-  SBC_BOARD = ${SBC_BOARD}
+  OS = ${OS}
+  OS_BOARD = ${OS_BOARD}
   OS_VARIANT = ${OS_VARIANT}
 
 Command line targets:
-  help-mod	        Display this help.
+  help-mod          Display this help.
 endef
 
 export HelpModMsg
 help-mod:
-	@echo "$$HelpModMsg" | less
+> @echo "$$HelpModMsg" | less
 endif
