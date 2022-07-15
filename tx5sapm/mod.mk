@@ -4,8 +4,8 @@
 $(info MOD=${MOD})
 
 # 3D CAD models.
-CAD_TOOL = openscad
-CAD_TOOL_VARIANT = dev
+CAD_TOOL_3DP = openscad
+CAD_TOOL_3DP_VARIANT = dev
 
 # Firmware variant.
 FIRMWARE = marlin
@@ -20,7 +20,7 @@ MARLIN_FIRMWARE = update.cbd
 SERVER_SOFTWARE = octoprint
 OS = linux
 OS_BOARD = opiz
-OS_VARIANT = debian
+OS_VARIANT = armbian
 
 ifeq (${MAKECMDGOALS},help-mod)
 define HelpModMsg
@@ -32,8 +32,8 @@ printer.
 See the other help targets for more information.
 
 Defines (see help for more information):
-  CAD_TOOL = ${CAD_TOOL}
-  CAD_TOOL_VARIANT = ${CAD_TOOL_VARIANT}
+  CAD_TOOL_3DP = ${CAD_TOOL_3DP}
+  CAD_TOOL_3DP_VARIANT = ${CAD_TOOL_3DP_VARIANT}
   FIRMWARE = ${FIRMWARE}
   FIRMWARE_VARIANT = ${FIRMWARE_VARIANT}
   MARLIN_MOD_BOARD = ${MARLIN_MOD_BOARD}
