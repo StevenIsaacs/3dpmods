@@ -17,17 +17,17 @@ MARLIN_MOD_BOARD = chitu_f103
 MARLIN_FIRMWARE = update.cbd
 
 # Remote control software
-HUI_SOFTWARE = octoprint
-HUI_ADMIN = ${USER}
-HUI_ADMIN_ID = $(shell id -u)
-HUI_ADMIN_GID = $(shell id -g)
-HUI_USER = ${USER}
-HUI_USER_ID = ${HUI_ADMIN_ID}
-HUI_USER_GID = ${HUI_ADMIN_GID}
-HUI_ACCESS = ssh
-HUI_OS = linux
-HUI_OS_BOARD = opiz
-HUI_OS_VARIANT = armbian
+GW_SOFTWARE = octoprint
+GW_ADMIN = ${USER}
+GW_ADMIN_ID = $(shell id -u)
+GW_ADMIN_GID = $(shell id -g)
+GW_USER = ${USER}
+GW_USER_ID = ${GW_ADMIN_ID}
+GW_USER_GID = ${GW_ADMIN_GID}
+MCU_ACCESS_METHOD = ssh
+GW_OS = linux
+GW_OS_BOARD = opiz
+GW_OS_VARIANT = armbian
 
 ifeq (${MAKECMDGOALS},help-mod)
 define HelpModMsg
@@ -45,13 +45,13 @@ Defines (see help for more information):
   FIRMWARE_VARIANT = ${FIRMWARE_VARIANT}
   MARLIN_MOD_BOARD = ${MARLIN_MOD_BOARD}
   MARLIN_FIRMWARE = ${MARLIN_FIRMWARE}
-  HUI_SOFTWARE = ${HUI_SOFTWARE}
-  HUI_ADMIN = ${HUI_ADMIN}
-  HUI_USER = ${HUI_USER}
-  HUI_ACCESS = ${HUI_ACCESS}
-  HUI_OS = ${HUI_OS}
-  HUI_OS_BOARD = ${HUI_OS_BOARD}
-  HUI_OS_VARIANT = ${HUI_OS_VARIANT}
+  GW_SOFTWARE = ${GW_SOFTWARE}
+  GW_ADMIN = ${GW_ADMIN}
+  GW_USER = ${GW_USER}
+  MCU_ACCESS_METHOD = ${MCU_ACCESS_METHOD}
+  GW_OS = ${GW_OS}
+  GW_OS_BOARD = ${GW_OS_BOARD}
+  GW_OS_VARIANT = ${GW_OS_VARIANT}
 
 Command line targets:
   help-mod          Display this help.
