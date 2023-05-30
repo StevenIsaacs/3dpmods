@@ -25,5 +25,5 @@ endef
 
 export HelpKitMsg
 help-kit:
-	@echo "$$HelpKitMsg" | less
+> @echo "$$HelpKitMsg" | less
 endif
