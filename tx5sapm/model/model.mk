@@ -81,10 +81,10 @@ endif
 
 ifeq (${MAKECMDGOALS},help-model)
 define HelpModelMsg
-Make segment: model.mk (Used by ed-oscad)
+Make segment: model.mk (Used by ModFW)
 
-This segement defines all the targets for building the 3D printed parts
-for the Tronxy X5SA Pro 3D printer mod and is included by the ed-oscad
+This segment defines all the targets for building the 3D printed parts
+for the Tronxy X5SA Pro 3D printer mod and is included by the ModFW
 top level make file.
 
 Defined in mod.mk:
@@ -97,7 +97,7 @@ Defined in config.mk:
 Defines:
 
 Command line targets:
-  help-octoprint        Display this help.
+  help-model    Display this help.
 
 Uses:
 
