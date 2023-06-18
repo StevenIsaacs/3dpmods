@@ -6,75 +6,75 @@ $(info CAD model for the Tronxy XS5A Pro mod)
 # The X mount needs to be modified. A SolidPython script
 # will be used. At that time this needs to be replaced
 # with a dependency on the script.
-${OSC_STL_DIR}/x_motor_mount_X5SA.stl: \
-  ${OSC_OTS_DIR}/djb-x.stl
+${OSC_STL_PATH}/x_motor_mount_X5SA.stl: \
+  ${OSC_OTS_PATH}/djb-x.stl
 > mkdir -p $(@D)
 > cp $< $@
 
-${OSC_STL_DIR}/y_motor_mount_X5SA.stl: \
-  ${OSC_OTS_DIR}/djb-y.stl
+${OSC_STL_PATH}/y_motor_mount_X5SA.stl: \
+  ${OSC_OTS_PATH}/djb-y.stl
 > mkdir -p $(@D)
 > cp $< $@
 
 #++++++++++++++++++++++++++++++++++++++++
 # Downloaded from the net.
 #----------------------------------------
-${OSC_STL_DIR}/Cornerbrackets.stl:
+${OSC_STL_PATH}/Cornerbrackets.stl:
 > mkdir -p $(@D)
 > wget -O $@ \
 >   https://cdn.thingiverse.com/assets/d6/30/9e/1f/7d/Cornerbrackets.STL
 
-${OSC_STL_DIR}/x-belt-holder-gt2.stl:
+${OSC_STL_PATH}/x-belt-holder-gt2.stl:
 > mkdir -p $(@D)
 > wget -O $@ \
 >   https://cdn.thingiverse.com/assets/20/e0/50/20/35/X-Belt-Holder-GT2.stl
 
-${OSC_STL_DIR}/x-belt-holder-thin-gt2.stl:
+${OSC_STL_PATH}/x-belt-holder-thin-gt2.stl:
 > mkdir -p $(@D)
 > wget -O $@ \
 >   https://cdn.thingiverse.com/assets/2e/a0/07/b3/cd/X-Belt-Holder-Thin-GT2.stl
 
 # Model dependencies.
 MODEL_DEPS = \
-  ${OSC_STL_DIR}/x_motor_mount_X5SA.stl \
-  ${OSC_STL_DIR}/y_motor_mount_X5SA.stl \
-  ${OSC_STL_DIR}/Cornerbrackets.stl \
-  ${OSC_STL_DIR}/x-belt-holder-gt2.stl \
-  ${OSC_STL_DIR}/x-belt-holder-thin-gt2.stl \
+  ${OSC_STL_PATH}/x_motor_mount_X5SA.stl \
+  ${OSC_STL_PATH}/y_motor_mount_X5SA.stl \
+  ${OSC_STL_PATH}/Cornerbrackets.stl \
+  ${OSC_STL_PATH}/x-belt-holder-gt2.stl \
+  ${OSC_STL_PATH}/x-belt-holder-thin-gt2.stl \
 
 # Running OctoPrint has some advantages -- one of which is display of the
 # bed leveling mesh.
 
 ifdef OS_BOARD
 ifeq (${OS_BOARD},rpi3)
-${OSC_STL_DIR}/rpi_3b_top.stl:
+${OSC_STL_PATH}/rpi_3b_top.stl:
 > mkdir -p $(@D)
 > wget -O $@ \
 >   https://cdn.thingiverse.com/assets/ca/1f/da/dd/38/Ender3OctopiTop.stl
 
-${OSC_STL_DIR}/rpi_3b_bottom.stl:
+${OSC_STL_PATH}/rpi_3b_bottom.stl:
 > mkdir -p $(@D)
 > wget -O $@ \
 >   https://cdn.thingiverse.com/assets/f1/4b/1b/8b/d8/RaspPi_Bp_bottom_case_V2.stl
 
 MODEL_DEPS += \
-  ${OSC_STL_DIR}/rpi_3b_top.stl \
-  ${OSC_STL_DIR}/rpi_3b_bottom.stl
+  ${OSC_STL_PATH}/rpi_3b_top.stl \
+  ${OSC_STL_PATH}/rpi_3b_bottom.stl
 endif
 ifeq (${OS_BOARD},opiz)
-${OSC_STL_DIR}/opiz_top.stl:
+${OSC_STL_PATH}/opiz_top.stl:
 > mkdir -p $(@D)
 > wget -O $@ \
 >   https://cdn.thingiverse.com/assets/c8/8f/23/bf/e2/opiz_box_top_1v0.stl
 
-${OSC_STL_DIR}/opiz_bottom.stl:
+${OSC_STL_PATH}/opiz_bottom.stl:
 > mkdir -p $(@D)
 > wget -O $@ \
 >   https://cdn.thingiverse.com/assets/2e/82/97/2c/d4/opiz_box_bottom1_1v0.stl
 
 MODEL_DEPS += \
-  ${OSC_STL_DIR}/opiz_top.stl \
-  ${OSC_STL_DIR}/opiz_bottom.stl
+  ${OSC_STL_PATH}/opiz_top.stl \
+  ${OSC_STL_PATH}/opiz_bottom.stl
 endif
 endif
 

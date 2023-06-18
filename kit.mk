@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------
 $(info KIT=${KIT})
 
-include ${MOD_DIR}/mod.mk
+include ${MOD_PATH}/mod.mk
 
 ifeq (${MAKECMDGOALS},help-kit)
 define HelpKitMsg
@@ -14,7 +14,7 @@ Make segment: kit.mk
 This is a supported collection of mods for 3D printers.
 
 Defined previously:
-  KIT_DIR = ${KIT_DIR}
+  KIT_PATH = ${KIT_PATH}
     Where the kit is cloned to.
 
 Defines:
