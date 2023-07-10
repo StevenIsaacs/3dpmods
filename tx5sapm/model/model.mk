@@ -96,7 +96,7 @@ Defined in config.mk:
 
 Defines:
 
-Command line targets:
+Command line goals:
   help-model    Display this help.
 
 Uses:
