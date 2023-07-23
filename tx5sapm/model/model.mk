@@ -1,7 +1,13 @@
 #++++++++++++++++++++++++++++++++++++++++
-# From the Tronxy XS5A Pro zip file.
+# CAD model for the Tronxy XS5A Pro mod
 #----------------------------------------
 $(info CAD model for the Tronxy XS5A Pro mod)
+
+# +++++
+# Preamble
+ifndef tx5mdl_id
+$(call Enter-Segment,tx5mdl)
+# -----
 
 # The X mount needs to be modified. A SolidPython script
 # will be used. At that time this needs to be replaced
@@ -79,9 +85,12 @@ endif
 endif
 
 
-ifeq (${MAKECMDGOALS},help-model)
-define HelpModelMsg
-Make segment: model.mk (Used by ModFW)
+# +++++
+# Postamble
+# Define help only if needed.
+ifneq ($(call Is-Goal,help-${tx5mdl_seg}),)
+define help_${tx5mdl_name}_msg
+Make segment: ${tx5mdl_seg}.mk
 
 This segment defines all the targets for building the 3D printed parts
 for the Tronxy X5SA Pro 3D printer mod and is included by the ModFW
@@ -97,7 +106,7 @@ Defined in config.mk:
 Defines:
 
 Command line goals:
-  help-model    Display this help.
+  help-${tx5mdl_seg}   Display this help.
 
 Uses:
 
@@ -124,9 +133,10 @@ Attributions:
     NOTE: OpenScad source is also available.
     https://www.thingiverse.com/thing:3157217
 endef
+endif # help goal message.
 
-export HelpModelMsg
-help-model:
-> @echo "$$HelpModelMsg" | less
-
-endif
+$(call Exit-Segment,tx5mdl)
+else # tx5mdl_id exists
+$(call Check-Segment-Conflicts,tx5mdl)
+endif # tx5mdl_id
+# -----
