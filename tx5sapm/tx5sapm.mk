@@ -31,7 +31,7 @@ GW_ADMIN_GID := $(shell id -g)
 GW_USER := ${USER}
 GW_USER_ID := ${GW_ADMIN_ID}
 GW_USER_GID := ${GW_ADMIN_GID}
-MCU_ACCESS_METHOD := ssh
+MCU_ACCESS_METHOD := headless
 GW_APP := octoprint
 $(call Use-Segment,gw_app/${GW_APP})
 
